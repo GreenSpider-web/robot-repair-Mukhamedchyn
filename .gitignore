@@ -1,0 +1,31 @@
+# Unity temp & build folders
+/[L|l]ibrary/
+/[T|t]emp/
+/[O|o]bj/
+/[B|b]uild/
+/[B|b]uilds/
+/[L|l]ogs/
+/[U|u]serSettings/
+/[M|m]emoryCaptures/
+/[R|r]ecordings/
+
+# Visual Studio / VS Code / JetBrains Rider
+/.vs/
+/.idea/
+/*.csproj
+/*.unityproj
+/*.sln
+/*.suo
+/*.user
+/*.userprefs
+/*.pidb
+/*.booproj
+/*.svd
+/*.pdb
+/*.opendb
+/*.db
+
+# OS / System
+.DS_Store
+Thumbs.db
+sysinfo.txt
