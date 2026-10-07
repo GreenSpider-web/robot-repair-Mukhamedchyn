@@ -1,27 +1,27 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerController : MonoBehaviour
 {
-
     public InputAction MoveAction;
+    Rigidbody2D rigidbody2d;
+    Vector2 move;
+    public float speed = 3.0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         MoveAction.Enable();
+        rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Vector2 position = transform.position;
-        //position.x = position.x + 0.1f;
-        //transform.position = position;
+        move = MoveAction.ReadValue<Vector2>();
+    }
 
-        Vector2 move = MoveAction.ReadValue<Vector2>();
-        Debug.Log(move);
-        Vector2 position = (Vector2)transform.position + move*3.0f * Time.deltaTime;
-        transform.position = position;
-
+    void FixedUpdate()
+    {
+        Vector2 position = (Vector2)rigidbody2d.position + move * speed * Time.deltaTime;
+        rigidbody2d.MovePosition(position);
     }
 }
