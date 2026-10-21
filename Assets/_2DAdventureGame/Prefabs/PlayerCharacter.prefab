@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8432574429248092738
+--- !u!1 &5319457279201433453
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8944723598704182494}
-  - component: {fileID: 808555450383463978}
-  - component: {fileID: 2149436867582449121}
-  - component: {fileID: 784487054505205433}
-  - component: {fileID: 2571465749009333087}
-  m_Layer: 6
+  - component: {fileID: 4603526057280379958}
+  - component: {fileID: 2552822991538804803}
+  - component: {fileID: 7371923770782447439}
+  - component: {fileID: 6043501702547789624}
+  - component: {fileID: 6282281045726995923}
+  m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8944723598704182494
+--- !u!4 &4603526057280379958
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8432574429248092738}
+  m_GameObject: {fileID: 5319457279201433453}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2, y: 0, z: 0}
@@ -35,14 +35,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &808555450383463978
+--- !u!212 &2552822991538804803
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8432574429248092738}
+  m_GameObject: {fileID: 5319457279201433453}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -94,28 +94,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 1
---- !u!114 &2149436867582449121
+--- !u!114 &7371923770782447439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8432574429248092738}
+  m_GameObject: {fileID: 5319457279201433453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0067c04a5f75d5a46b7a0c4d753c3ab5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fb48b85818cf104683fe69e6e9a23c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   MoveAction:
     m_Name: Move
     m_Type: 0
     m_ExpectedControlType: Vector2
-    m_Id: 92ca7f31-29de-4d05-ba0b-f610d262a62a
+    m_Id: 4675bd13-d0ab-4dcf-b1df-2ce09a0977df
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 2D Vector
-      m_Id: f26e91c7-26cb-4d18-acd0-bc32a175175d
+      m_Id: f7b728ad-f6fd-4adc-8f63-78a42ab17669
       m_Path: 2DVector
       m_Interactions: 
       m_Processors: 
@@ -123,7 +123,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 4
     - m_Name: up
-      m_Id: 2651e9ff-a04f-4d6c-862f-1b71e8cc2604
+      m_Id: 7055f2cf-1214-4233-a29f-a6f3f1b538a5
       m_Path: <Keyboard>/w
       m_Interactions: 
       m_Processors: 
@@ -131,7 +131,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     - m_Name: down
-      m_Id: 746c264d-a222-42fc-aaec-57dd94adccdd
+      m_Id: 76843b07-9de1-4836-b1eb-d5cad6d9cabd
       m_Path: <Keyboard>/s
       m_Interactions: 
       m_Processors: 
@@ -139,7 +139,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     - m_Name: left
-      m_Id: 5d51d30d-cd87-440f-ae64-693ac7dca2f1
+      m_Id: 038c3ad9-babe-4653-9782-6728959c87f4
       m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
@@ -147,23 +147,15 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     - m_Name: right
-      m_Id: f49207ef-946d-4ab7-a944-074bc4870146
+      m_Id: 1eeafe77-4fd4-4234-b57b-9d648c036a54
       m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Move
       m_Flags: 8
-    - m_Name: 
-      m_Id: 1d356b75-bed2-4cfa-a488-195c4db1ee49
-      m_Path: <Gamepad>/leftStick
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 0
     - m_Name: 2D Vector
-      m_Id: 17c50f78-97f1-403f-bbd8-252450c58faf
+      m_Id: 09847267-ac0d-42ef-8d81-d145314ed648
       m_Path: 2DVector
       m_Interactions: 
       m_Processors: 
@@ -171,7 +163,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 4
     - m_Name: up
-      m_Id: 28d69c62-d35b-4fc3-9f0e-5fbf8bea239a
+      m_Id: c1ee454c-cd90-4184-af9d-cb9fd4a53662
       m_Path: <Keyboard>/upArrow
       m_Interactions: 
       m_Processors: 
@@ -179,7 +171,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     - m_Name: down
-      m_Id: d6cc2cb7-5992-4d4a-98c5-e4d2ec6cf18e
+      m_Id: 324d4ac0-5140-4dc1-9644-c546e307c10e
       m_Path: <Keyboard>/downArrow
       m_Interactions: 
       m_Processors: 
@@ -187,7 +179,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     - m_Name: left
-      m_Id: cb307b56-b0a0-442c-a15a-449a01380949
+      m_Id: 1f28ec55-6928-497c-afaf-95f22c2f58e7
       m_Path: <Keyboard>/leftArrow
       m_Interactions: 
       m_Processors: 
@@ -195,7 +187,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     - m_Name: right
-      m_Id: f8c9c2a6-eb2f-4cef-be9c-80f8b6eb2f0f
+      m_Id: 9a8bd3f0-ca77-4580-9a64-3bed5459af62
       m_Path: <Keyboard>/rightArrow
       m_Interactions: 
       m_Processors: 
@@ -204,37 +196,14 @@ MonoBehaviour:
       m_Flags: 8
     m_Flags: 0
     m_Priority: 0
-  speed: 4
-  maxHealth: 5
-  timeInvincible: 2
-  projectilePrefab: {fileID: 8968306194364563550, guid: de26167019488c74fa44fe7a2c0724a9,
-    type: 3}
-  LaunchAction:
-    m_Name: Launch
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 2c8d581f-b133-481b-80d6-3a59665f373c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 96e58e91-7d9b-4e9b-8e8f-a08622c93d50
-      m_Path: <Keyboard>/c
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Launch
-      m_Flags: 0
-    m_Flags: 0
-    m_Priority: 0
---- !u!50 &784487054505205433
+--- !u!50 &6043501702547789624
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8432574429248092738}
+  m_GameObject: {fileID: 5319457279201433453}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -254,13 +223,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2571465749009333087
+--- !u!61 &6282281045726995923
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8432574429248092738}
+  m_GameObject: {fileID: 5319457279201433453}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -288,7 +257,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.14343059}
+  m_Offset: {x: 0, y: 0.118165314}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -298,5 +267,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.77, y: 0.28686118}
+  m_Size: {x: 0.77, y: 0.23633063}
   m_EdgeRadius: 0

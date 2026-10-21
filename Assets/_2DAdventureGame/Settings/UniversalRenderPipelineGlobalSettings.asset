@@ -65,8 +65,8 @@ MonoBehaviour:
       - rid: 6985022627758211072
       - rid: 6985022627758211073
       - rid: 6985022627758211074
-      - rid: 7917947457012236501
-      - rid: 7917947457012236502
+      - rid: 4176533800369258709
+      - rid: 4176533800369258710
     m_RuntimeSettings:
       m_List: []
   m_AssetVersion: 10
@@ -99,6 +99,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 4176533800369258709
+      type: {class: UniversalRenderPipelineRuntimeTerrainShaders, ns: UnityEngine.Rendering.Universal,
+        asm: Unity.RenderPipelines.Universal.Runtime}
+      data:
+        m_Version: 0
+        m_TerrainDetailLit: {fileID: 4800000, guid: f6783ab646d374f94b199774402a5144,
+          type: 3}
+        m_TerrainDetailGrassBillboard: {fileID: 4800000, guid: 29868e73b638e48ca99a19ea58c48d90,
+          type: 3}
+        m_TerrainDetailGrass: {fileID: 4800000, guid: e507fdfead5ca47e8b9a768b51c291a1,
+          type: 3}
+    - rid: 4176533800369258710
+      type: {class: URPTerrainShaderSetting, ns: UnityEngine.Rendering.Universal,
+        asm: Unity.RenderPipelines.Universal.Runtime}
+      data:
+        m_Version: 0
+        m_IncludeTerrainShaders: 1
     - rid: 6985022627758211072
       type: {class: RayTracingRenderPipelineResources, ns: UnityEngine.Rendering.UnifiedRayTracing,
         asm: Unity.UnifiedRayTracing.Runtime}
@@ -528,20 +545,3 @@ MonoBehaviour:
         m_IncludeReferencedInScenes: 0
         m_IncludeAssetsByLabel: 0
         m_LabelToInclude: 
-    - rid: 7917947457012236501
-      type: {class: UniversalRenderPipelineRuntimeTerrainShaders, ns: UnityEngine.Rendering.Universal,
-        asm: Unity.RenderPipelines.Universal.Runtime}
-      data:
-        m_Version: 0
-        m_TerrainDetailLit: {fileID: 4800000, guid: f6783ab646d374f94b199774402a5144,
-          type: 3}
-        m_TerrainDetailGrassBillboard: {fileID: 4800000, guid: 29868e73b638e48ca99a19ea58c48d90,
-          type: 3}
-        m_TerrainDetailGrass: {fileID: 4800000, guid: e507fdfead5ca47e8b9a768b51c291a1,
-          type: 3}
-    - rid: 7917947457012236502
-      type: {class: URPTerrainShaderSetting, ns: UnityEngine.Rendering.Universal,
-        asm: Unity.RenderPipelines.Universal.Runtime}
-      data:
-        m_Version: 0
-        m_IncludeTerrainShaders: 1
