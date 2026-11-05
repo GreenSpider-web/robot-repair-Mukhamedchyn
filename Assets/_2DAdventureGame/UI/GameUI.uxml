@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="NPCDialogue" src="project://database/Assets/_2DAdventureGame/UI/NPCDialogue.uxml?fileID=9197481963319205126&amp;guid=5c802cdb7e21402dac66ff7b38354bf9&amp;type=3#NPCDialogue" />
+    <ui:Template name="EndScreen" src="project://database/Assets/_2DAdventureGame/UI/EndScreen.uxml?fileID=9197481963319205126&amp;guid=4feb05b3802445f7b5782d67dc964425&amp;type=3#EndScreen" />
+    <ui:VisualElement name="HealthBarBackground" style="flex-grow: 0; width: 450px; height: 215px; margin-left: 20px; margin-top: 20px; background-image: url(&quot;project://database/Assets/_2DAdventureGame/Art/Ducko/UI/UIHealthFrame.png?fileID=21300000&amp;guid=b47cdbd2062c5e64ba5a0bf3f6b045b1&amp;type=3#UIHealthFrame&quot;); -unity-background-scale-mode: scale-to-fit;">
+        <ui:VisualElement name="HealthBarContainer" style="position: absolute; left: 187px; top: 68px; width: 246px; height: 68px;">
+            <ui:VisualElement name="HealthBar" style="width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/_2DAdventureGame/Art/Ducko/UI/UIHealthBar.png?fileID=21300000&amp;guid=39fe000f2b6d9d04b93d6a76310e29aa&amp;type=3#UIHealthBar&quot;); -unity-background-scale-mode: stretch-to-fill;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="CharacterPortrait" style="position: absolute; left: 8px; top: 16px; width: 168px; height: 176px; background-image: url(&quot;project://database/Assets/_2DAdventureGame/Art/Ducko/UI/CharacterPortrait.png?fileID=21300000&amp;guid=0332b35b8fe3cf8458eb0558889493d1&amp;type=3#CharacterPortrait&quot;); -unity-background-scale-mode: scale-to-fit;" />
+    </ui:VisualElement>
+    <ui:Label name="RobotCounter" text="Полагоджено 0 / 0" style="position: absolute; top: 30px; right: 40px; font-size: 40px; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(0, 0, 0);" />
+    <ui:Instance template="NPCDialogue" name="NPCDialogue" style="position: absolute; top: 70%; right: 10%; bottom: 0; left: 10%;" />
+    <ui:Instance template="EndScreen" name="EndScreen" picking-mode="Ignore" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;" />
+</ui:UXML>

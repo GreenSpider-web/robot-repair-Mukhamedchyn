@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
     int direction = 1;
     bool broken = true;
 
+    public bool isBroken { get { return broken; } }
+
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -70,5 +72,6 @@ public class EnemyController : MonoBehaviour
         broken = false;
         rigidbody2d.simulated = false;
         animator.SetTrigger("Fixed");
+        UIHandler.instance.EnemyFixed();
     }
 }

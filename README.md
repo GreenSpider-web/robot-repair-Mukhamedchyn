@@ -215,3 +215,129 @@ public class EnemyController : MonoBehaviour
     }
 }
 ```
+
+### 05.11.2026 — Юніт 5: HUD, діалоги, ігровий цикл
+
+**Що зроблено:**
+* **HUD:** У теці `UI` створив `GameUI.uxml`. Зверху `HealthBarBackground` з рамкою `UIHealthFrame`, всередині `HealthBarContainer` з `HealthBar` (`UIHealthBar`, `stretch-to-fill`) і `CharacterPortrait` останнім у списку, щоб портрет малювався поверх смуги. На об'єкті `UIDocument` в сцені — `Panel Settings` з `Scale Mode = Scale With Screen Size`, `Reference Resolution = 1920 × 1080`.
+* **UIHandler як синглтон:** `public static UIHandler instance { get; private set; }` заповнюється в `Awake()`. `SetHealthValue(float)` міняє `style.width` смуги через `Length.Percent`. У `PlayerController.ChangeHealth` замість `Debug.Log` тепер `UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth)`.
+* **NPC:** `NonPlayerCharacterSheet` перевів у `Sprite Mode = Multiple` (нарізка `MarthaIdle1…4` 256×256 уже була). Зробив кліп `NPC` з `MarthaIdle1…3` (`Samples = 4`, Loop Time) і контролер у `Animation → Ducko → NPC`. Об'єкт `NPC` на новому шарі `NPC`, `Box Collider 2D` під ноги, дочірній `DialogueBox` з бульбашкою «Press X», яку `NonPlayerCharacter` ховає в `Start()`. Зберіг у префаб `NPC`.
+* **Розмова:** У `PlayerController` додав `TalkAction` (`Button`, `X [Keyboard]`). В `Update()` кожен кадр пускаю `Physics2D.Raycast` з точки трохи вище ніг у бік `moveDirection` на 1.5 одиниці лише по шару `NPC`. Влучив — вмикаю бульбашку і запам'ятовую NPC в `lastNonPlayerCharacter`; натиснув X — `UIHandler.instance.DisplayDialogue()` показує вікно `NPCDialogue` на 4 секунди. Відвернувся — бульбашка гасне.
+* **Ігровий цикл:** `EndScreen.uxml` з `LoseScreenContainer` і `WinScreenContainer` (`opacity: 0`, `transition-duration: 1s`). `GameManager` на окремому об'єкті: здоров'я 0 — `DisplayLoseScreen()`, всі `EnemyController` з `isBroken == false` — `DisplayWinScreen()`, і через `Invoke(nameof(ReloadScene), 3f)` сцена завантажується знову. В `EnemyController` для цього з'явилась властивість `isBroken`.
+* **Спробувати більше (2 пункти):** прапорець `bool gameOver` у `GameManager` — на початку `Update()` `if (gameOver) return;`, а перед `Invoke` — `gameOver = true;`. І лічильник «Полагоджено 0 / 1» у правому верхньому куті: `Label` у `GameUI`, `UIHandler` рахує ворогів у `Start()`, а `Fix()` ворога викликає `UIHandler.instance.EnemyFixed()`.
+* **Перевірка в Play:** смуга меншає на зоні шкоди, бульбашка з'являється тільки обличчям до NPC, X показує репліку, після влучання у ворога — екран перемоги, після 0 здоров'я — поразка, в обох випадках рівень перезапускається. Console без помилок і попереджень.
+
+**Що не вийшло або забрало найбільше часу:**
+* **NPC не нарізався:** спрайт-шит NPC стояв у `Sprite Mode = Single`, хоча кадри `MarthaIdle1…4` в метаданих уже були, тому в Project показувалась одна картинка 512×512 з чотирма качками. Перемкнув на `Multiple`, і кадри з'явилися.
+* **NPC закрив аптечку:** спершу поставив NPC у (-3.5, 2.2), а бульбашка «Press X» налізла прямо на аптечку в лівому верхньому куті. Переставив його в (-4.3, -0.2) — на одну лінію з точкою старту робота, тепер досить пройти ліворуч, і промінь його ловить.
+* **Дублікати класів:** в `Tutorial_Demo/Demo_Scripts` лежать свої `UIHandler`, `NonPlayerCharacter`, `GameManager` у просторі імен `Beginner2D`. В `Add Component` кожен виїжджає двічі — брав свій, без підпису, як і з `Projectile` в юніті 4.
+* **Перезапуск сцени:** у `Build Profiles → Scene List` були тільки демо-сцени (`StartScreen`, `Ruby_Example_Scene` тощо), а моєї `MainScene` не було — `SceneManager.LoadScene` її б не знайшов. Додав через `Add Open Scenes`.
+
+**Що зрозумів про UI Toolkit, синглтон і raycast:**
+* В UI Toolkit інтерфейс — це дерево `VisualElement` у файлі `.uxml`, а стиль (розмір, картинка, прозорість) пишеться прямо на елементі. Скрипт шукає елемент через `rootVisualElement.Q<VisualElement>("HealthBar")` за ім'ям, і регістр важливий: `Healthbar` і `HealthBar` — це різні імена. Порядок у дереві = порядок малювання: хто нижче, той зверху.
+* Синглтон — клас, у якого в грі рівно один екземпляр, і до нього можна достукатись звідусіль через статичну властивість. Робот, ворог і `GameManager` просто пишуть `UIHandler.instance`, без поля в Inspector. Для ворогів так не можна, бо їх кілька, і `instance` перезаписувався б останнім.
+* Промінь замість тригера, бо тригер спрацьовує від будь-якого дотику, навіть спиною, а промінь іде саме туди, куди дивиться робот. Маска `LayerMask.GetMask("NPC")` пропускає все інше — і ворогів, і декорації.
+* `(float)` у `currentHealth / (float)maxHealth`: ділення двох `int` у C# відкидає дробову частину, тож 4 / 5 дало б 0, і смуга була б або повна, або порожня. Якщо хоча б одне число `float`, результат 0.8 — 80% ширини.
+* `Invoke` без `gameOver` ставив би новий виклик `ReloadScene` у чергу щокадру, поки йдуть 3 секунди, — прапорець робить кінець гри одноразовою подією.
+
+**Що каже мій NPC і чому саме це:**
+* «Тисни C, щоб стріляти шестернями, і допоможи полагодити ці зламані бойлери! Повертайся, коли закінчиш». Мої вороги — зламані бойлери-големи, а NPC — механік, тому вона одразу пояснює і керування (C), і мету (полагодити, а не знищити). Гравець, який першим ділом іде до неї, вже знає, що робити.
+
+**Умови перемоги й поразки в моєму зрізі:**
+* Перемога — полагоджено всіх ворогів (зараз один бойлер), лічильник показує «1 / 1». Поразка — здоров'я падає до 0 на зоні шкоди чи від ударів ворога. Через 3 секунди після екрана рівень починається спочатку, з повним здоров'ям.
+
+**Що робитиму далі:**
+* Поставити ще 2 ворогів, щоб лічильник був «0 / 3», і другого NPC зі своєю реплікою.
+* Юніт 6: камера за роботом, звуки і візуальні ефекти.
+
+**Код скрипта UIHandler:**
+```csharp
+using UnityEngine;
+using UnityEngine.UIElements;
+
+public class UIHandler : MonoBehaviour
+{
+    public static UIHandler instance { get; private set; }
+
+    public float displayTime = 4.0f;
+    private VisualElement m_NonPlayerDialogue;
+    private float m_TimerDisplay;
+
+    private VisualElement m_Healthbar;
+    private VisualElement m_WinScreen;
+    private VisualElement m_LoseScreen;
+
+    // Спробувати більше: лічильник полагоджених ворогів
+    private Label m_RobotCounter;
+    private int m_EnemiesTotal;
+    private int m_EnemiesFixed;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    void Start()
+    {
+        UIDocument uiDocument = GetComponent<UIDocument>();
+
+        m_Healthbar = uiDocument.rootVisualElement.Q<VisualElement>("HealthBar");
+        SetHealthValue(1.0f);
+
+        m_NonPlayerDialogue = uiDocument.rootVisualElement.Q<VisualElement>("NPCDialogue");
+        m_NonPlayerDialogue.style.display = DisplayStyle.None;
+        m_TimerDisplay = -1.0f;
+
+        m_LoseScreen = uiDocument.rootVisualElement.Q<VisualElement>("LoseScreenContainer");
+        m_WinScreen = uiDocument.rootVisualElement.Q<VisualElement>("WinScreenContainer");
+
+        m_RobotCounter = uiDocument.rootVisualElement.Q<Label>("RobotCounter");
+        m_EnemiesTotal = FindObjectsByType<EnemyController>(FindObjectsSortMode.None).Length;
+        UpdateRobotCounter();
+    }
+
+    public void SetHealthValue(float percentage)
+    {
+        m_Healthbar.style.width = Length.Percent(100 * percentage);
+    }
+
+    private void Update()
+    {
+        if (m_TimerDisplay > 0)
+        {
+            m_TimerDisplay -= Time.deltaTime;
+            if (m_TimerDisplay < 0)
+            {
+                m_NonPlayerDialogue.style.display = DisplayStyle.None;
+            }
+        }
+    }
+
+    public void DisplayDialogue()
+    {
+        m_NonPlayerDialogue.style.display = DisplayStyle.Flex;
+        m_TimerDisplay = displayTime;
+    }
+
+    public void DisplayWinScreen()
+    {
+        m_WinScreen.style.opacity = 1.0f;
+    }
+
+    public void DisplayLoseScreen()
+    {
+        m_LoseScreen.style.opacity = 1.0f;
+    }
+
+    public void EnemyFixed()
+    {
+        m_EnemiesFixed++;
+        UpdateRobotCounter();
+    }
+
+    void UpdateRobotCounter()
+    {
+        m_RobotCounter.text = "Полагоджено " + m_EnemiesFixed + " / " + m_EnemiesTotal;
+    }
+}
+```
